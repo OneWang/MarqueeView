@@ -2,8 +2,8 @@
 //  MarqueeView.m
 //  MarqueeView
 //
-//  Created by WQ on 15/12/28.
-//  Copyright © 2015年 WQL. All rights reserved.
+//  Created by Wang on 15/12/28.
+//  Copyright © 2015年 Wang. All rights reserved.
 //
 
 #import "MarqueeView.h"
@@ -150,7 +150,6 @@
 }
 //计算文字的高度
 - (CGFloat)heightForTextString:(NSString *)str width:(CGFloat)tWidth fontSize:(CGFloat)tSize{
-    
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:tSize]};
     CGRect rect = [str boundingRectWithSize:CGSizeMake(tWidth, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
     return rect.size.height + 5;
