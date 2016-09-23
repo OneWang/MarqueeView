@@ -2,7 +2,7 @@
 //  MarqueeView.h
 //  MarqueeView
 //
-//  Created by Wang on 15/12/28.
+//  Created by Wang on 15/10/28.
 //  Copyright © 2015年 Wang. All rights reserved.
 //
 

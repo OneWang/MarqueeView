@@ -2,8 +2,8 @@
 //  MarqueeView.h
 //  MarqueeView
 //
-//  Created by WQ on 15/12/28.
-//  Copyright © 2015年 WQ. All rights reserved.
+//  Created by Wang on 16/09/18.
+//  Copyright © 2015年 Wang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
