@@ -43,13 +43,14 @@
     return _labelArray;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withDirection:(MarqueeViewOrientationStyle)style
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize withDirection:(MarqueeViewOrientationStyle)style
 {
     if (self = [super initWithFrame:frame]) {
 
         UIView *content = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         content.clipsToBounds = YES;
         self.contentView = content;
+        content.backgroundColor = [UIColor blueColor];
         [self addSubview: self.contentView];
         
         CGFloat viewHeight = frame.size.height;
@@ -65,14 +66,16 @@
         UILabel *myLable = [[UILabel alloc]init];
         myLable.numberOfLines = 0;
         myLable.text = title;
-        myLable.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
+//        myLable.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
+        myLable.font = [UIFont systemFontOfSize:fontSize];
         
         //计算文本的宽度
-        CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:MarqueeViewFontOfSize];
+//        CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:MarqueeViewFontOfSize];
+        CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:fontSize];
         //这两个frame很重要 分别记录的是左右两个label的frame 而且后面也会需要到这两个frame
         currentFrame = CGRectMake(0, 0, textWidth, labelHeight);
         if (style == MarqueeViewHorizontalStyle) {
-            //如果文本的宽度小于等于视图的宽度才时, label 的宽度和 view 的宽度大小一样
+            //如果文本的宽度小于等于视图的宽度时, label 的宽度和 view 的宽度大小一样
             if (textWidth <= frame.size.width){
                 currentFrame = CGRectMake(0, 0, labelWidth, labelHeight);
                 behindFrame = CGRectMake(currentFrame.origin.x + currentFrame.size.width, 0, labelWidth, labelHeight);
@@ -80,10 +83,11 @@
                 behindFrame = CGRectMake(currentFrame.origin.x + currentFrame.size.width, 0, textWidth, labelHeight);
             }
         }else{
-            CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:MarqueeViewFontOfSize];
+//            CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:MarqueeViewFontOfSize];
+            CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:fontSize];
             currentFrame = CGRectMake(0, 0, labelWidth, textHeight);
             behindFrame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y + currentFrame.size.height, labelWidth, textHeight);
-            //当使用数值滚动的时候 frame 的高度设置为文字的高度;外部设置不起作用;
+            //当使用竖直滚动的时候 frame 的高度设置为文字的高度;外部设置不起作用;
             CGRect rect = self.frame;
             rect.size.height = textHeight;
             self.frame = rect;
@@ -100,7 +104,8 @@
         behindLabel.numberOfLines = 0;
         behindLabel.frame = behindFrame;
         behindLabel.text = title;
-        behindLabel.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
+//        behindLabel.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
+        behindLabel.font = [UIFont systemFontOfSize:fontSize];
         [self.labelArray addObject:behindLabel];
         [self.contentView addSubview:behindLabel];
         [self doAnimationWithDirection:style];

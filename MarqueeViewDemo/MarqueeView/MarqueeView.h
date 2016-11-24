@@ -16,7 +16,7 @@ typedef  NS_ENUM(NSInteger,MarqueeViewOrientationStyle){
 @interface MarqueeView : UIView
 
 ///初始化
-- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withDirection:(MarqueeViewOrientationStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize withDirection:(MarqueeViewOrientationStyle)style;
 ///开始
 - (void)start;
 ///停止

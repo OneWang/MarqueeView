@@ -20,8 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withDirection:MarqueeViewVerticalStyle];
-    self.marquee.backgroundColor = [UIColor purpleColor];
+    self.marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withTextFontSize:20 withDirection:MarqueeViewVerticalStyle];
+    self.marquee.backgroundColor = [UIColor greenColor];
+    self.marquee.layer.cornerRadius = 5;
+    self.marquee.layer.masksToBounds = YES;
     [self.view addSubview:self.marquee];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
