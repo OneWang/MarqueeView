@@ -7,7 +7,7 @@
 	
 ###使用方法:
 ```
-self.marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withDirection:MarqueeViewVerticalStyle];
+self.marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withTextFontSize:20 withDirection:MarqueeViewVerticalStyle];
 
 self.marquee.backgroundColor = [UIColor purpleColor];
 [self.view addSubview:self.marquee];
