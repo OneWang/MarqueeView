@@ -8,50 +8,28 @@
 
 #import "MarqueeView.h"
 
-///控制滚动速度;数值越大速度越快
-#define ratio 2
-///显示文字的字体大小
-#define MarqueeViewFontOfSize 17
-
-@interface MarqueeView()
-{
+@interface MarqueeView(){
     //当前label的frame
     CGRect currentFrame;
     //后面label的frame
     CGRect behindFrame;
     //是否为暂停状态
     BOOL isStop;
-    //单次循环的时间
-    NSInteger time;
 }
-//存放左右label的数组
+/** 存放左右label的数组 */
 @property (strong, nonatomic) NSMutableArray *labelArray;
-
-//展示的内容视图
-@property (weak, nonatomic) UIView *contentView;
+/** 单次循环的时间 */
+@property (assign, nonatomic) NSInteger interval;
 
 @end
 
 @implementation MarqueeView
 
-#pragma mark - 懒加载
-- (NSMutableArray *)labelArray
-{
-    if (!_labelArray) {
-        _labelArray = [NSMutableArray array];
-    }
-    return _labelArray;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize withDirection:(MarqueeViewOrientationStyle)style
-{
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style{
     if (self = [super initWithFrame:frame]) {
-
-        UIView *content = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        content.clipsToBounds = YES;
-        self.contentView = content;
-        content.backgroundColor = [UIColor blueColor];
-        [self addSubview: self.contentView];
+        UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        contentView.clipsToBounds = YES;
+        [self addSubview:contentView];
         
         CGFloat viewHeight = frame.size.height;
         CGFloat viewWidth = frame.size.width;
@@ -61,16 +39,14 @@
         CGFloat labelWidth = viewWidth;
 
         //循环的时间这里取的是4 此数越大速度越快
-        time = title.length/ratio;
+        self.interval = interval;
         
         UILabel *myLable = [[UILabel alloc]init];
         myLable.numberOfLines = 0;
         myLable.text = title;
-//        myLable.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
         myLable.font = [UIFont systemFontOfSize:fontSize];
         
         //计算文本的宽度
-//        CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:MarqueeViewFontOfSize];
         CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:fontSize];
         //这两个frame很重要 分别记录的是左右两个label的frame 而且后面也会需要到这两个frame
         currentFrame = CGRectMake(0, 0, textWidth, labelHeight);
@@ -83,7 +59,6 @@
                 behindFrame = CGRectMake(currentFrame.origin.x + currentFrame.size.width, 0, textWidth, labelHeight);
             }
         }else{
-//            CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:MarqueeViewFontOfSize];
             CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:fontSize];
             currentFrame = CGRectMake(0, 0, labelWidth, textHeight);
             behindFrame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y + currentFrame.size.height, labelWidth, textHeight);
@@ -92,35 +67,33 @@
             rect.size.height = textHeight;
             self.frame = rect;
             
-            CGRect contentRect = self.contentView.frame;
+            CGRect contentRect = contentView.frame;
             contentRect.size.height = textHeight;
-            self.contentView.frame = contentRect;
+            contentView.frame = contentRect;
         }
         myLable.frame = currentFrame;
-        [self.contentView addSubview:myLable];
+        [contentView addSubview:myLable];
         [self.labelArray addObject:myLable];
         
         UILabel *behindLabel = [[UILabel alloc]init];
         behindLabel.numberOfLines = 0;
         behindLabel.frame = behindFrame;
         behindLabel.text = title;
-//        behindLabel.font = [UIFont systemFontOfSize:MarqueeViewFontOfSize];
         behindLabel.font = [UIFont systemFontOfSize:fontSize];
         [self.labelArray addObject:behindLabel];
-        [self.contentView addSubview:behindLabel];
+        [contentView addSubview:behindLabel];
         [self doAnimationWithDirection:style];
     }
     return self;
 }
 
-- (void)doAnimationWithDirection:(MarqueeViewOrientationStyle)style
-{
+//滚动动画
+- (void)doAnimationWithDirection:(MarqueeViewOrientationStyle)style{
     //取到两个label
     UILabel *lableOne = self.labelArray[0];
     UILabel *lableTwo = self.labelArray[1];
     //UIViewAnimationOptionCurveLinear是为了让lable做匀速动画
-    [UIView animateWithDuration:time delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-    
+    [UIView animateWithDuration:self.interval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         //让两个label向左平移
         if (style == MarqueeViewHorizontalStyle) {
             lableOne.transform = CGAffineTransformMakeTranslation(-currentFrame.size.width, 0);
@@ -153,6 +126,7 @@
     CGRect rect = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, tHeight) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
     return rect.size.width + 5;
 }
+
 //计算文字的高度
 - (CGFloat)heightForTextString:(NSString *)str width:(CGFloat)tWidth fontSize:(CGFloat)tSize{
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:tSize]};
@@ -160,8 +134,7 @@
     return rect.size.height + 5;
 }
 
-- (void)start
-{
+- (void)start{
     UILabel *lableOne = self.labelArray[0];
     [self resumeLayer:lableOne.layer];
     
@@ -171,8 +144,7 @@
     isStop = NO;
 }
 
-- (void)stop
-{
+- (void)stop{
     UILabel *lableOne = self.labelArray[0];
     [self pauseLayer:lableOne.layer];
     
@@ -183,32 +155,31 @@
 }
 
 //暂停动画
-- (void)pauseLayer:(CALayer*)layer
-{
+- (void)pauseLayer:(CALayer *)layer{
     CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    
     layer.speed = 0;
-    
     layer.timeOffset = pausedTime;
 }
 
 //恢复动画
-- (void)resumeLayer:(CALayer*)layer
-{
+- (void)resumeLayer:(CALayer *)layer{
     //当你是停止状态时，则恢复
     if (isStop) {
         CFTimeInterval pauseTime = [layer timeOffset];
-        
         layer.speed = 1.0;
-        
         layer.timeOffset = 0.0;
-        
         layer.beginTime = 0.0;
-        
         CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pauseTime;
-        
         layer.beginTime = timeSincePause;
     }
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)labelArray{
+    if (!_labelArray) {
+        _labelArray = [NSMutableArray array];
+    }
+    return _labelArray;
 }
 
 @end

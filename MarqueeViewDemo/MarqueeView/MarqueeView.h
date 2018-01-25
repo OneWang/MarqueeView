@@ -15,11 +15,26 @@ typedef  NS_ENUM(NSInteger,MarqueeViewOrientationStyle){
 
 @interface MarqueeView : UIView
 
-///初始化
-- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize withDirection:(MarqueeViewOrientationStyle)style;
-///开始
+
+/**
+ 初始化方法
+
+ @param frame 当滚动方式为竖直滚动的时候会将设置的frame自动切割为文字的高度,当滚动方式为水平滚动的时候则不会;
+ @param title 滚动的内容
+ @param fontSize 字体大小
+ @param style 滚动样式
+ @param interval 时长
+ @return instancetype
+ */
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style;
+/**
+ 开始
+ */
 - (void)start;
-///停止
+
+/**
+ 暂停
+ */
 - (void)stop;
 
 @end

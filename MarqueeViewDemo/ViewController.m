@@ -12,7 +12,7 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) MarqueeView *marquee;
+@property (weak, nonatomic) MarqueeView *marquee;
 
 @end
 
@@ -20,10 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withTextFontSize:20 withDirection:MarqueeViewVerticalStyle];
-    self.marquee.backgroundColor = [UIColor greenColor];
-    self.marquee.layer.cornerRadius = 5;
-    self.marquee.layer.masksToBounds = YES;
+    MarqueeView *marquee = [[MarqueeView alloc]initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 100) withTitle:@"拿啥啥便宜 买啥～～ " withTextFontSize:20 witTimeInteval:2 withDirection:MarqueeViewVerticalStyle];
+    self.marquee = marquee;
+    self.marquee.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.marquee];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -32,7 +31,6 @@
     [button setTitle:@"停止" forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor grayColor]];
     [self.view addSubview:button];
-    
     
     UIButton *buttona = [UIButton buttonWithType:UIButtonTypeCustom];
     buttona.frame = CGRectMake((self.view.frame.size.width-100)/2, 300, 100, 50);
