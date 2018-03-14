@@ -174,6 +174,15 @@
     }
 }
 
+//设置文字颜色
+- (void)setTextColor:(UIColor *)textColor{
+    _textColor = textColor;
+    UILabel *lableOne = self.labelArray[0];
+    UILabel *lableTwo = self.labelArray[1];
+    lableOne.textColor = textColor;
+    lableTwo.textColor = textColor;
+}
+
 #pragma mark - 懒加载
 - (NSMutableArray *)labelArray{
     if (!_labelArray) {

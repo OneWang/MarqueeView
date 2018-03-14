@@ -15,10 +15,10 @@ typedef  NS_ENUM(NSInteger,MarqueeViewOrientationStyle){
 
 @interface MarqueeView : UIView
 
-
+/** 设置文字颜色 */
+@property (strong, nonatomic) UIColor *textColor;
 /**
  初始化方法
-
  @param frame 当滚动方式为竖直滚动的时候会将设置的frame自动切割为文字的高度,当滚动方式为水平滚动的时候则不会;
  @param title 滚动的内容
  @param fontSize 字体大小
