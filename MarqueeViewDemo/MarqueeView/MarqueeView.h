@@ -27,6 +27,9 @@ typedef  NS_ENUM(NSInteger,MarqueeViewOrientationStyle){
  @return instancetype
  */
 - (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style;
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withDirection:(MarqueeViewOrientationStyle)style;
+
 /**
  开始
  */

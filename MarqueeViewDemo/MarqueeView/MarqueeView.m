@@ -8,6 +8,9 @@
 
 #import "MarqueeView.h"
 
+static const CGFloat fontSize = 15;
+static const NSInteger timeInteval = 2;
+
 @interface MarqueeView(){
     //当前label的frame
     CGRect currentFrame;
@@ -24,6 +27,14 @@
 @end
 
 @implementation MarqueeView
+
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withDirection:(MarqueeViewOrientationStyle)style{
+    return [self initWithFrame:frame withTitle:title withTextFontSize:fontSize witTimeInteval:timeInteval withDirection:style];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style{
+    return [self initWithFrame:frame withTitle:title withTextFontSize:fontSize witTimeInteval:interval withDirection:style];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title withTextFontSize:(CGFloat)fontSize witTimeInteval:(NSInteger)interval withDirection:(MarqueeViewOrientationStyle)style{
     if (self = [super initWithFrame:frame]) {
