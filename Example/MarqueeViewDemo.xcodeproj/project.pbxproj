@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04558840207A2A9D0052D9B8 /* MarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0455883F207A2A9D0052D9B8 /* MarqueeView.m */; };
 		0A345AB01D7975D500FB9AE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AAF1D7975D500FB9AE0 /* main.m */; };
 		0A345AB31D7975D500FB9AE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AB21D7975D500FB9AE0 /* AppDelegate.m */; };
 		0A345AB61D7975D500FB9AE0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AB51D7975D500FB9AE0 /* ViewController.m */; };
@@ -15,7 +16,6 @@
 		0A345ABE1D7975D500FB9AE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A345ABC1D7975D500FB9AE0 /* LaunchScreen.storyboard */; };
 		0A345AC91D7975D500FB9AE0 /* MarqueeViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AC81D7975D500FB9AE0 /* MarqueeViewDemoTests.m */; };
 		0A345AD41D7975D500FB9AE0 /* MarqueeViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AD31D7975D500FB9AE0 /* MarqueeViewDemoUITests.m */; };
-		0A345AE71D79775C00FB9AE0 /* MarqueeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A345AE61D79775C00FB9AE0 /* MarqueeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0455883E207A2A9D0052D9B8 /* MarqueeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeView.h; sourceTree = "<group>"; };
+		0455883F207A2A9D0052D9B8 /* MarqueeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeView.m; sourceTree = "<group>"; };
 		0A345AAB1D7975D500FB9AE0 /* MarqueeViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarqueeViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A345AAF1D7975D500FB9AE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A345AB11D7975D500FB9AE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -52,8 +54,6 @@
 		0A345ACF1D7975D500FB9AE0 /* MarqueeViewDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarqueeViewDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A345AD31D7975D500FB9AE0 /* MarqueeViewDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarqueeViewDemoUITests.m; sourceTree = "<group>"; };
 		0A345AD51D7975D500FB9AE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A345AE51D79775C00FB9AE0 /* MarqueeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeView.h; sourceTree = "<group>"; };
-		0A345AE61D79775C00FB9AE0 /* MarqueeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +81,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0455883D207A2A9D0052D9B8 /* MarqueeView */ = {
+			isa = PBXGroup;
+			children = (
+				0455883E207A2A9D0052D9B8 /* MarqueeView.h */,
+				0455883F207A2A9D0052D9B8 /* MarqueeView.m */,
+			);
+			name = MarqueeView;
+			path = ../../MarqueeView;
+			sourceTree = "<group>";
+		};
+		04558841207A2AA30052D9B8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				0A345AB71D7975D500FB9AE0 /* Main.storyboard */,
+				0A345ABA1D7975D500FB9AE0 /* Assets.xcassets */,
+				0A345ABC1D7975D500FB9AE0 /* LaunchScreen.storyboard */,
+				0A345ABF1D7975D500FB9AE0 /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		0A345AA21D7975D500FB9AE0 = {
 			isa = PBXGroup;
 			children = (
@@ -104,15 +125,12 @@
 		0A345AAD1D7975D500FB9AE0 /* MarqueeViewDemo */ = {
 			isa = PBXGroup;
 			children = (
-				0A345AE41D79775C00FB9AE0 /* MarqueeView */,
+				0455883D207A2A9D0052D9B8 /* MarqueeView */,
 				0A345AB11D7975D500FB9AE0 /* AppDelegate.h */,
 				0A345AB21D7975D500FB9AE0 /* AppDelegate.m */,
 				0A345AB41D7975D500FB9AE0 /* ViewController.h */,
 				0A345AB51D7975D500FB9AE0 /* ViewController.m */,
-				0A345AB71D7975D500FB9AE0 /* Main.storyboard */,
-				0A345ABA1D7975D500FB9AE0 /* Assets.xcassets */,
-				0A345ABC1D7975D500FB9AE0 /* LaunchScreen.storyboard */,
-				0A345ABF1D7975D500FB9AE0 /* Info.plist */,
+				04558841207A2AA30052D9B8 /* Config */,
 				0A345AAE1D7975D500FB9AE0 /* Supporting Files */,
 			);
 			path = MarqueeViewDemo;
@@ -142,15 +160,6 @@
 				0A345AD51D7975D500FB9AE0 /* Info.plist */,
 			);
 			path = MarqueeViewDemoUITests;
-			sourceTree = "<group>";
-		};
-		0A345AE41D79775C00FB9AE0 /* MarqueeView */ = {
-			isa = PBXGroup;
-			children = (
-				0A345AE51D79775C00FB9AE0 /* MarqueeView.h */,
-				0A345AE61D79775C00FB9AE0 /* MarqueeView.m */,
-			);
-			path = MarqueeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,7 +295,7 @@
 				0A345AB61D7975D500FB9AE0 /* ViewController.m in Sources */,
 				0A345AB31D7975D500FB9AE0 /* AppDelegate.m in Sources */,
 				0A345AB01D7975D500FB9AE0 /* main.m in Sources */,
-				0A345AE71D79775C00FB9AE0 /* MarqueeView.m in Sources */,
+				04558840207A2A9D0052D9B8 /* MarqueeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MarqueeViewDemo/Info.plist;
+				INFOPLIST_FILE = MarqueeViewDemo/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = li.MarqueeViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -456,7 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = MarqueeViewDemo/Info.plist;
+				INFOPLIST_FILE = MarqueeViewDemo/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = li.MarqueeViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
