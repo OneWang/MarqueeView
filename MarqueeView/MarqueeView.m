@@ -11,18 +11,18 @@
 static const CGFloat fontSize = 15;
 static const NSInteger timeInteval = 2;
 
-@interface MarqueeView(){
-    //当前label的frame
-    CGRect currentFrame;
-    //后面label的frame
-    CGRect behindFrame;
-    //是否为暂停状态
-    BOOL isStop;
-}
+@interface MarqueeView()
+
 /** 存放左右label的数组 */
 @property (strong, nonatomic) NSMutableArray *labelArray;
 /** 单次循环的时间 */
 @property (assign, nonatomic) NSInteger interval;
+/** 当前label的frame */
+@property (assign, nonatomic) CGRect currentFrame;
+/** 后面label的frame */
+@property (assign, nonatomic) CGRect behindFrame;
+/** 是否为暂停状态 */
+@property (assign, nonatomic) BOOL isStop;
 
 @end
 
@@ -60,19 +60,19 @@ static const NSInteger timeInteval = 2;
         //计算文本的宽度
         CGFloat textWidth = [self widthForTextString:title height:labelHeight fontSize:fontSize];
         //这两个frame很重要 分别记录的是左右两个label的frame 而且后面也会需要到这两个frame
-        currentFrame = CGRectMake(0, 0, textWidth, labelHeight);
+        _currentFrame = CGRectMake(0, 0, textWidth, labelHeight);
         if (style == MarqueeViewHorizontalStyle) {
             //如果文本的宽度小于等于视图的宽度时, label 的宽度和 view 的宽度大小一样
             if (textWidth <= frame.size.width){
-                currentFrame = CGRectMake(0, 0, labelWidth, labelHeight);
-                behindFrame = CGRectMake(currentFrame.origin.x + currentFrame.size.width, 0, labelWidth, labelHeight);
+                self.currentFrame = CGRectMake(0, 0, labelWidth, labelHeight);
+                self.behindFrame = CGRectMake(self.currentFrame.origin.x + self.currentFrame.size.width, 0, labelWidth, labelHeight);
             }else{
-                behindFrame = CGRectMake(currentFrame.origin.x + currentFrame.size.width, 0, textWidth, labelHeight);
+                self.behindFrame = CGRectMake(self.currentFrame.origin.x + self.currentFrame.size.width, 0, textWidth, labelHeight);
             }
         }else{
             CGFloat textHeight = [self heightForTextString:title width:labelWidth fontSize:fontSize];
-            currentFrame = CGRectMake(0, 0, labelWidth, textHeight);
-            behindFrame = CGRectMake(currentFrame.origin.x, currentFrame.origin.y + currentFrame.size.height, labelWidth, textHeight);
+            self.currentFrame = CGRectMake(0, 0, labelWidth, textHeight);
+            self.behindFrame = CGRectMake(self.currentFrame.origin.x, self.currentFrame.origin.y + self.currentFrame.size.height, labelWidth, textHeight);
             //当使用竖直滚动的时候 frame 的高度设置为文字的高度;外部设置不起作用;
             CGRect rect = self.frame;
             rect.size.height = textHeight;
@@ -82,13 +82,13 @@ static const NSInteger timeInteval = 2;
             contentRect.size.height = textHeight;
             contentView.frame = contentRect;
         }
-        myLable.frame = currentFrame;
+        myLable.frame = self.currentFrame;
         [contentView addSubview:myLable];
         [self.labelArray addObject:myLable];
         
         UILabel *behindLabel = [[UILabel alloc]init];
         behindLabel.numberOfLines = 0;
-        behindLabel.frame = behindFrame;
+        behindLabel.frame = self.behindFrame;
         behindLabel.text = title;
         behindLabel.font = [UIFont systemFontOfSize:fontSize];
         [self.labelArray addObject:behindLabel];
@@ -107,20 +107,20 @@ static const NSInteger timeInteval = 2;
     [UIView animateWithDuration:self.interval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         //让两个label向左平移
         if (style == MarqueeViewHorizontalStyle) {
-            lableOne.transform = CGAffineTransformMakeTranslation(-currentFrame.size.width, 0);
-            lableTwo.transform = CGAffineTransformMakeTranslation(-currentFrame.size.width, 0);
+            lableOne.transform = CGAffineTransformMakeTranslation(-self.currentFrame.size.width, 0);
+            lableTwo.transform = CGAffineTransformMakeTranslation(-self.currentFrame.size.width, 0);
         }else{
-            lableOne.transform = CGAffineTransformMakeTranslation(0, -currentFrame.size.height);
-            lableTwo.transform = CGAffineTransformMakeTranslation(0, -currentFrame.size.height);
+            lableOne.transform = CGAffineTransformMakeTranslation(0, -self.currentFrame.size.height);
+            lableTwo.transform = CGAffineTransformMakeTranslation(0, -self.currentFrame.size.height);
         }
     } completion:^(BOOL finished) {
         //两个label水平相邻摆放 内容一样 label1为初始时展示的 label2位于界面的右侧，未显示出来
         //当完成动画时，即第一个label在界面中消失，第二个label位于第一个label的起始位置时，把第一个label放置到第二个label的初始位置
         lableOne.transform = CGAffineTransformIdentity;
-        lableOne.frame = behindFrame;
+        lableOne.frame = self.behindFrame;
 
         lableTwo.transform = CGAffineTransformIdentity;
-        lableTwo.frame = currentFrame;
+        lableTwo.frame = self.currentFrame;
         
         //在数组中将第一个label放置到右侧，第二个label放置到左侧（因为此时展示的就是labelTwo）
         [self.labelArray replaceObjectAtIndex:1 withObject:lableOne];
@@ -152,7 +152,7 @@ static const NSInteger timeInteval = 2;
     UILabel *lableTwo = self.labelArray[1];
     [self resumeLayer:lableTwo.layer];
     
-    isStop = NO;
+    _isStop = NO;
 }
 
 - (void)stop{
@@ -162,7 +162,7 @@ static const NSInteger timeInteval = 2;
     UILabel *lableTwo = self.labelArray[1];
     [self pauseLayer:lableTwo.layer];
     
-    isStop = YES;
+    _isStop = YES;
 }
 
 //暂停动画
@@ -175,7 +175,7 @@ static const NSInteger timeInteval = 2;
 //恢复动画
 - (void)resumeLayer:(CALayer *)layer{
     //当你是停止状态时，则恢复
-    if (isStop) {
+    if (_isStop) {
         CFTimeInterval pauseTime = [layer timeOffset];
         layer.speed = 1.0;
         layer.timeOffset = 0.0;
