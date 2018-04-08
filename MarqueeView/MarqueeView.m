@@ -103,31 +103,32 @@ static const NSInteger timeInteval = 2;
     //取到两个label
     UILabel *lableOne = self.labelArray[0];
     UILabel *lableTwo = self.labelArray[1];
+    __weak typeof(self) weakSelf = self;
     //UIViewAnimationOptionCurveLinear是为了让lable做匀速动画
     [UIView animateWithDuration:self.interval delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         //让两个label向左平移
         if (style == MarqueeViewHorizontalStyle) {
-            lableOne.transform = CGAffineTransformMakeTranslation(-self.currentFrame.size.width, 0);
-            lableTwo.transform = CGAffineTransformMakeTranslation(-self.currentFrame.size.width, 0);
+            lableOne.transform = CGAffineTransformMakeTranslation(-weakSelf.currentFrame.size.width, 0);
+            lableTwo.transform = CGAffineTransformMakeTranslation(-weakSelf.currentFrame.size.width, 0);
         }else{
-            lableOne.transform = CGAffineTransformMakeTranslation(0, -self.currentFrame.size.height);
-            lableTwo.transform = CGAffineTransformMakeTranslation(0, -self.currentFrame.size.height);
+            lableOne.transform = CGAffineTransformMakeTranslation(0, -weakSelf.currentFrame.size.height);
+            lableTwo.transform = CGAffineTransformMakeTranslation(0, -weakSelf.currentFrame.size.height);
         }
     } completion:^(BOOL finished) {
         //两个label水平相邻摆放 内容一样 label1为初始时展示的 label2位于界面的右侧，未显示出来
         //当完成动画时，即第一个label在界面中消失，第二个label位于第一个label的起始位置时，把第一个label放置到第二个label的初始位置
         lableOne.transform = CGAffineTransformIdentity;
-        lableOne.frame = self.behindFrame;
+        lableOne.frame = weakSelf.behindFrame;
 
         lableTwo.transform = CGAffineTransformIdentity;
-        lableTwo.frame = self.currentFrame;
+        lableTwo.frame = weakSelf.currentFrame;
         
         //在数组中将第一个label放置到右侧，第二个label放置到左侧（因为此时展示的就是labelTwo）
-        [self.labelArray replaceObjectAtIndex:1 withObject:lableOne];
-        [self.labelArray replaceObjectAtIndex:0 withObject:lableTwo];
+        [weakSelf.labelArray replaceObjectAtIndex:1 withObject:lableOne];
+        [weakSelf.labelArray replaceObjectAtIndex:0 withObject:lableTwo];
         
         //递归调用
-        [self doAnimationWithDirection:style];
+        [weakSelf doAnimationWithDirection:style];
     }];
 }
 
