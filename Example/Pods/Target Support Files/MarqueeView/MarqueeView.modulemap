@@ -1,0 +1,6 @@
+framework module MarqueeView {
+  umbrella header "MarqueeView-umbrella.h"
+
+  export *
+  module * { export * }
+}

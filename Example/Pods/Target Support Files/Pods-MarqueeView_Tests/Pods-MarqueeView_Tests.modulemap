@@ -1,0 +1,6 @@
+framework module Pods_MarqueeView_Tests {
+  umbrella header "Pods-MarqueeView_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
