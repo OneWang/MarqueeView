@@ -22,7 +22,7 @@ pod 'MarqueeView'
 
 ## Author
 
-OneWang, wangqingfei@exinlei.com
+OneWang, jackwangqingfei@gmail.com
 
 ## License
 
