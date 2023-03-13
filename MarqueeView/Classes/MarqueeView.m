@@ -173,7 +173,7 @@ static const NSInteger timeInteval = 2;
     layer.timeOffset = pausedTime;
 }
 
-//恢复动画
+//恢复动画方法
 - (void)resumeLayer:(CALayer *)layer{
     //当你是停止状态时，则恢复
     if (_isStop) {
