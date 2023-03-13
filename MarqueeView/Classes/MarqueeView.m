@@ -186,7 +186,7 @@ static const NSInteger timeInteval = 2;
     }
 }
 
-//设置文字颜色
+// 设置文字颜色
 - (void)setTextColor:(UIColor *)textColor{
     _textColor = textColor;
     UILabel *lableOne = self.labelArray[0];
