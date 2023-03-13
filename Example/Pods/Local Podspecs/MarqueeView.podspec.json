@@ -2,14 +2,14 @@
   "name": "MarqueeView",
   "version": "0.1.0",
   "summary": "A short description of MarqueeView.",
-  "description": "TODO: Add long description of the pod here.",
+  "description": "This is a text wheel animation component, support horizontal and vertical.",
   "homepage": "https://github.com/OneWang/MarqueeView",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "OneWang": "wangqingfei@exinlei.com"
+    "OneWang": "jackwangqingfei@gmail.com"
   },
   "source": {
     "git": "https://github.com/OneWang/MarqueeView.git",
@@ -18,5 +18,6 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "MarqueeView/Classes/**/*"
+  "source_files": "MarqueeView/Classes/**/*",
+  "frameworks": "UIKit"
 }
